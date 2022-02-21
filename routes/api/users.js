@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
-
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
@@ -53,13 +49,13 @@ router.post(
         },
       };
 
-      jwt.sign(payload, secret, { expiresIn: 3600 }, (err, token) => {
+      jwt.sign(payload, secret, { expiresIn: 360000 }, (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        return res.json({ token });
       });
     } catch (e) {
       console.error(e.message);
-      res.status(500).json("Server Error");
+      return res.status(500).json("Server Error");
     }
   }
 );

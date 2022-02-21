@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
-
 const express = require("express");
 const router = express.Router();
 const { auth } = require("../../middleware/auth");
@@ -14,10 +10,10 @@ const { check, validationResult } = require("express-validator");
 router.get("/", auth, async (req, res) => {
   try {
     const userData = await User.findById(req.user.id).select("-password");
-    res.json({ userData });
+    return res.json({ userData });
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ msg: "Server Error" });
+    return res.status(500).json({ msg: "Server Error" });
   }
 });
 
@@ -44,8 +40,8 @@ router.post(
 
       const isValidUser = await bcrypt.compare(password, loginUser.password);
 
-      if(!isValidUser){
-          return res.status(400).json({ error: [{ msg: "Email or password is incorrect" }] });
+      if (!isValidUser) {
+        return res.status(400).json({ error: [{ msg: "Email or password is incorrect" }] });
       }
 
       const payload = {
@@ -54,13 +50,13 @@ router.post(
         },
       };
 
-      jwt.sign(payload, secret, { expiresIn: 3600 }, (err, token) => {
+      jwt.sign(payload, secret, { expiresIn: 360000 }, (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        return res.json({ token });
       });
     } catch (e) {
       console.error(e.message);
-      res.status(500).json("Server Error");
+      return res.status(500).json("Server Error");
     }
   }
 );
