@@ -8,6 +8,8 @@ const authRoute = require("./routes/api/auth");
 
 dbConnect();
 
+app.use(express.json({ extended: false }));
+
 app.get("/", (req, res) => {
   res.send("Api Running");
 });
