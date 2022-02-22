@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_TOKEN_SECRET;
 const { check, validationResult } = require("express-validator");
 
+//* get a user
+
 router.get("/", auth, async (req, res) => {
   try {
     const userData = await User.findById(req.user.id).select("-password");
@@ -16,6 +18,8 @@ router.get("/", auth, async (req, res) => {
     return res.status(500).json({ msg: "Server Error" });
   }
 });
+
+//* login a user
 
 router.post(
   "/",

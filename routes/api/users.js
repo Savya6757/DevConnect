@@ -7,6 +7,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_TOKEN_SECRET;
 
+//* create new User
+
 router.post(
   "/",
   [

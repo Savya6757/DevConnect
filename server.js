@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const dbConnect = require("./config/db");
@@ -14,7 +18,7 @@ app.get("/", (req, res) => {
   res.send("Api Running");
 });
 
-app.use("/api/users", usersRoute);
+app.use("/api/user", usersRoute);
 app.use("/api/profile", profileRoute);
 app.use("/api/posts", postsRoute);
 app.use("/api/auth", authRoute);
