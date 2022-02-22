@@ -23,7 +23,7 @@ app.use("/api/profile", profileRoute);
 app.use("/api/posts", postsRoute);
 app.use("/api/auth", authRoute);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
