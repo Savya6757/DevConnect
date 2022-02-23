@@ -12,7 +12,7 @@ const { check, validationResult } = require("express-validator");
 router.get("/", auth, async (req, res) => {
   try {
     const userData = await User.findById(req.user.id).select("-password");
-    return res.json({ userData });
+    return res.json(userData);
   } catch (e) {
     console.log(e.message);
     return res.status(500).json({ msg: "Server Error" });
@@ -39,13 +39,13 @@ router.post(
       let loginUser = await User.findOne({ email });
 
       if (!loginUser) {
-        return res.status(400).json({ error: [{ msg: "Email or password is incorrect" }] });
+        return res.status(400).json({ errors: [{ msg: "Email or password is incorrect" }] });
       }
 
       const isValidUser = await bcrypt.compare(password, loginUser.password);
 
       if (!isValidUser) {
-        return res.status(400).json({ error: [{ msg: "Email or password is incorrect" }] });
+        return res.status(400).json({ errors: [{ msg: "Email or password is incorrect" }] });
       }
 
       const payload = {

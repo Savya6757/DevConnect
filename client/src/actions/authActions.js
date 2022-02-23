@@ -2,11 +2,12 @@ import axios from "axios";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  SET_ALERT,
   USER_AUTHENTICATED,
   AUTH_FAILED,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
+  CLEAR_PROFILE,
 } from "../actions/types";
 import setToken from "../utils/userLoded";
 
@@ -69,3 +70,8 @@ export const loginAction =
       dispatch({ type: LOGIN_FAIL });
     }
   };
+
+export const logoutAction = () => (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT });
+};

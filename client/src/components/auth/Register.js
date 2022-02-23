@@ -3,19 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAlert } from "../../actions/alertActions";
 import { Fragment } from "react";
 import { registerAction } from "../../actions/authActions";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-  //   const [formData, setFormData] = useState({
-  //     name: "",
-  //     email: "",
-  //     password: "",
-  //     passwordCheck: "",
-  //   });
-
   const passwordRef = useRef();
   const passwordCheckRef = useRef();
   const nameRef = useRef();
@@ -48,12 +40,12 @@ const Register = () => {
       dispatch(registerAction({ ...newFormData }));
     }
   };
+
   if (isAuthenticated) {
     return <Navigate to="/dashboard" />;
   }
 
   return (
-    // <section className="container">
     <Fragment>
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
@@ -90,10 +82,9 @@ const Register = () => {
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
       <p className="my-1">
-        Already have an account? <a href="login.html">Sign In</a>
+        Already have an account? <Link to="/login">Sign In</Link>
       </p>
     </Fragment>
-    // </section>
   );
 };
 

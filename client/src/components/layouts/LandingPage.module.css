@@ -15,3 +15,10 @@
   justify-content: center;
   text-align: center;
 }
+
+
+@media (max-width: 450px) {
+  .landing-inner h1 {
+    font-size: 2rem;
+  }
+}

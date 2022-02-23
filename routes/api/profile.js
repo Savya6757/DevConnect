@@ -5,6 +5,7 @@ const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 const { check, validationResult } = require("express-validator");
 const { default: axios } = require("axios");
+const Post = require("../../models/Posts");
 
 //* get profile of currently logged in user
 
@@ -136,6 +137,7 @@ router.get("/user/:userId", async (req, res) => {
 
 router.delete("/", auth, async (req, res) => {
   try {
+    await Post.deleteMany({ user: req.user.id });
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
     return res.json({ msg: "Deleted Successfully" });
@@ -152,7 +154,7 @@ router.put(
   [
     check("title", "title is required").notEmpty(),
     check("company", "company is required").notEmpty(),
-    check("from", "company is required").notEmpty(),
+    check("from", "From date is required and needs to be from the past").notEmpty(),
   ],
   async (req, res) => {
     const error = validationResult(req);
@@ -208,7 +210,7 @@ router.put(
     check("school", "School is required").notEmpty(),
     check("degree", "Degree is required").notEmpty(),
     check("fieldofstudy", "field of study is required").notEmpty(),
-    check("from", "company is required").notEmpty(),
+    check("from", "From date is required and needs to be from the past").notEmpty(),
   ],
   async (req, res) => {
     const error = validationResult(req);
