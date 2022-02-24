@@ -10,13 +10,10 @@ const profileRoute = require("./routes/api/profile");
 const postsRoute = require("./routes/api/posts");
 const authRoute = require("./routes/api/auth");
 const path = require("path");
-const helmet = require("helmet");
 
 dbConnect();
 
 app.use(express.json({ extended: false }));
-
-app.use(helmet({ contentSecurityPolicy: false , crossOriginEmbedderPolicy: true}));
 
 app.use("/api/user", usersRoute);
 app.use("/api/profile", profileRoute);
