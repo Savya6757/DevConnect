@@ -34,7 +34,7 @@ router.post(
       const avatar = gravatar.url(email, {
         s: "200",
         r: "pg",
-        d: "mm",
+        d: "https://cdn-icons-png.flaticon.com/512/560/560216.png",
       });
 
       newUser = await new User({ name, email, password, avatar });

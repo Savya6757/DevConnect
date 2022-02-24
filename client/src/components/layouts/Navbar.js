@@ -31,7 +31,7 @@ const Navbar = () => {
       </li>
       <li>
         <Link to="/login">
-          <i className="fa-solid fa-box-check"></i>
+          <i className="fa-solid fa-user-pen"></i>
           <span className="hide-sm"> Login</span>
         </Link>
       </li>
