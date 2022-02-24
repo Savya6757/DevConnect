@@ -16,7 +16,7 @@ dbConnect();
 
 app.use(express.json({ extended: false }));
 
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use("/api/user", usersRoute);
 app.use("/api/profile", profileRoute);
