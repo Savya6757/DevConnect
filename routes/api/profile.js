@@ -116,7 +116,7 @@ router.get("/", async (req, res) => {
 
 router.get("/user/:userId", async (req, res) => {
   try {
-    const profile = await Profile.find({ user: req.params.userId }).populate("user", [
+    const profile = await Profile.findOne({ user: req.params.userId }).populate("user", [
       "name",
       "avatar",
     ]);

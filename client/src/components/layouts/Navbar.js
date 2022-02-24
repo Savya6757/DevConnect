@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../actions/authActions";
@@ -8,15 +8,17 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const loading = useSelector((state) => state.auth.loading);
+  const navigate = useNavigate();
 
   const logoutClickHandler = () => {
     dispatch(logoutAction());
+    navigate("/login");
   };
 
   const userLoggedOut = (
     <ul>
       <li>
-        <Link to="/developer">Developers</Link>
+        <Link to="/profiles">Developers</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>
@@ -29,6 +31,12 @@ const Navbar = () => {
 
   const userLoggedIn = (
     <ul>
+      <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li>
+        <Link to="/posts">Posts</Link>
+      </li>
       <li>
         <Link to="/dashboard">
           <i className="fas fa-user" />

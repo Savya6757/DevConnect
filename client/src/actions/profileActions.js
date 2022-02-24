@@ -6,6 +6,8 @@ import {
   UPDATE_PROFILE,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
+  GET_ALL_PROFILES,
+  GET_REPO,
 } from "./types";
 
 export const getUserProfile = () => async (dispatch) => {
@@ -13,6 +15,54 @@ export const getUserProfile = () => async (dispatch) => {
     const res = await axios.get("/api/profile/me");
     dispatch({
       type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: PROFILE_FAILED,
+      payload: { msg: e.response.statusText, status: e.response.status },
+    });
+  }
+};
+
+export const getAllProfiles = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_PROFILE,
+  });
+  try {
+    const res = await axios.get("/api/profile");
+    dispatch({
+      type: GET_ALL_PROFILES,
+      payload: res.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: PROFILE_FAILED,
+      payload: { msg: e.response.statusText, status: e.response.status },
+    });
+  }
+};
+
+export const getSingleProfile = (userId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userId}`);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (e) {
+    dispatch({
+      type: PROFILE_FAILED,
+      payload: { msg: e.response.statusText, status: e.response.status },
+    });
+  }
+};
+
+export const getRepos = (username) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/github/${username}`);
+    dispatch({
+      type: GET_REPO,
       payload: res.data,
     });
   } catch (e) {

@@ -19,7 +19,6 @@ const initialState = {
 };
 
 const ProfileForm = () => {
-  console.log("hi");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const creatingProfile = useMatch("/create-profile");

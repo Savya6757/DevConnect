@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_PROFILE,
+  // CLEAR_PROFILE,
 } from "../actions/types";
 import setToken from "../utils/userLoded";
 
@@ -72,6 +72,6 @@ export const loginAction =
   };
 
 export const logoutAction = () => (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
+  // dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };

@@ -9,12 +9,20 @@ module.exports.auth = (req, res, next) => {
   }
 
   try {
-    const decode = jwt.verify(token, secret);
+    // const decode = jwt.verify(token, secret);
 
-    req.user = decode.user;
-    next();
+    jwt.verify(token, secret, (error, decoded) => {
+      if (error) {
+        return res.status(401).json({ msg: "Token is not valid" });
+      } else {
+        req.user = decoded.user;
+        next();
+      }
+    });
+    // req.user = decode.user;
+    // next();
   } catch (e) {
     console.log(e.message);
-    res.status(401).json({ msg: "Token is not valid" });
+    res.status(500).json({ msg: "server error" });
   }
 };

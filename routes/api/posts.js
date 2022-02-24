@@ -95,10 +95,10 @@ router.patch("/like/:postId", auth, async (req, res) => {
       return res.status(404).json({ msg: "Post not found" });
     }
 
-    const userLiked = post.likes.find((post) => post.user.toString() === req.user.id);
-    if (userLiked) {
-      return res.status(401).json({ msg: "Post already liked" });
+    if (post.likes.some((like) => like.user.toString() === req.user.id)) {
+      return res.status(400).json({ msg: "Post already liked" });
     }
+
     post.likes.unshift({ user: req.user.id });
 
     await post.save();
@@ -122,9 +122,8 @@ router.patch("/unlike/:postId", auth, async (req, res) => {
       return res.status(404).json({ msg: "Post not found" });
     }
 
-    const userLiked = post.likes.find((post) => post.user.toString() === req.user.id);
-    if (!userLiked) {
-      return res.status(401).json({ msg: "Post has not been liked" });
+    if (!post.likes.some((like) => like.user.toString() === req.user.id)) {
+      return res.status(400).json({ msg: "Post has not yet been liked" });
     }
     post.likes = post.likes.filter((like) => like.user.toString() !== req.user.id);
 
@@ -166,7 +165,7 @@ router.patch(
 
       await post.save();
 
-      res.json(post);
+      res.json(post.comments);
     } catch (e) {
       console.log(e.message);
       res.status(500).json({ msg: "server Error" });

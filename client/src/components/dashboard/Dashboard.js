@@ -8,13 +8,13 @@ import EducationList from "./EducationList";
 import ExperienceList from "./ExperienceList";
 
 const Dashboard = () => {
-  const { profile } = useSelector((state) => state.profile);
-  const { user } = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserProfile());
   }, [dispatch]);
+
+  const { profile } = useSelector((state) => state.profile);
+  const { user } = useSelector((state) => state.auth);
 
   const accountDeleteHandler = () => {
     dispatch(deleteAccount());
