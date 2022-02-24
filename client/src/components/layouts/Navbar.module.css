@@ -38,8 +38,14 @@
   margin-right: 0.6rem;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 470px) {
   .navbar {
     font-size: smaller;
+  }
+}
+
+@media (max-width: 780px) {
+  .navbar {
+    font-size: small;
   }
 }

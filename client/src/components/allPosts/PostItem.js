@@ -44,7 +44,7 @@ const PostItem = (props) => {
             </Link>
             {!auth.loading && user === auth.user._id && (
               <button type="button" className="btn btn-danger" onClick={deletePostHandler}>
-                <i class="fa-solid fa-trash"></i>
+                <i className="fa-solid fa-trash"></i>
               </button>
             )}
           </Fragment>

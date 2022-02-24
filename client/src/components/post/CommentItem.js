@@ -22,11 +22,11 @@ const CommentItem = (props) => {
           </Link>
         </div>
         <div>
-          <p class="my-1">{text}</p>
-          <p class="post-date">Posted on {formatDate(date)}</p>
+          <p className="my-1">{text}</p>
+          <p className="post-date">Posted on {formatDate(date)}</p>
           {!auth.loading && auth.user._id === user && (
             <button className="btn btn-danger" onClick={deleteCommentHandler} type="button">
-              <i class="fa-solid fa-trash"></i>
+              <i className="fa-solid fa-trash"></i>
             </button>
           )}
         </div>

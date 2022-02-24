@@ -18,13 +18,22 @@ const Navbar = () => {
   const userLoggedOut = (
     <ul>
       <li>
-        <Link to="/profiles">Developers</Link>
+        <Link to="/profiles">
+          <i className="fa-solid fa-laptop-code"></i>
+          <span className="hide-sm"> Developers</span>
+        </Link>
       </li>
       <li>
-        <Link to="/register">Register</Link>
+        <Link to="/register">
+          <i className="fa-solid fa-user-plus"></i>
+          <span className="hide-sm"> Register</span>
+        </Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/login">
+          <i className="fa-solid fa-box-check"></i>
+          <span className="hide-sm"> Login</span>
+        </Link>
       </li>
     </ul>
   );
@@ -32,10 +41,16 @@ const Navbar = () => {
   const userLoggedIn = (
     <ul>
       <li>
-        <Link to="/profiles">Developers</Link>
+        <Link to="/profiles">
+          <i className="fa-solid fa-laptop-code"></i>
+          <span className="hide-sm"> Developers</span>
+        </Link>
       </li>
       <li>
-        <Link to="/posts">Posts</Link>
+        <Link to="/posts">
+          <i className="fa-solid fa-sitemap"></i>
+          <span className="hide-sm"> Posts</span>
+        </Link>
       </li>
       <li>
         <Link to="/dashboard">
@@ -55,7 +70,9 @@ const Navbar = () => {
   return (
     <nav className={`${styles.navbar} bg-dark`}>
       <h1>
-        <Link to="/">&lt;/&gt; DevConnect</Link>
+        <Link to="/">
+          <i className="fa-solid fa-code"></i> DevConnect
+        </Link>
       </h1>
       {!loading && <Fragment>{isAuthenticated ? userLoggedIn : userLoggedOut}</Fragment>}
     </nav>

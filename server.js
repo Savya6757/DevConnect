@@ -9,19 +9,24 @@ const usersRoute = require("./routes/api/users");
 const profileRoute = require("./routes/api/profile");
 const postsRoute = require("./routes/api/posts");
 const authRoute = require("./routes/api/auth");
+const path = require("path");
 
 dbConnect();
 
 app.use(express.json({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.send("Api Running");
-});
-
 app.use("/api/user", usersRoute);
 app.use("/api/profile", profileRoute);
 app.use("/api/posts", postsRoute);
 app.use("/api/auth", authRoute);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 
