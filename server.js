@@ -10,10 +10,12 @@ const profileRoute = require("./routes/api/profile");
 const postsRoute = require("./routes/api/posts");
 const authRoute = require("./routes/api/auth");
 const path = require("path");
+const compression = require("compression");
 
 dbConnect();
 
 app.use(express.json({ extended: false }));
+app.use(compression());
 
 app.use("/api/user", usersRoute);
 app.use("/api/profile", profileRoute);
