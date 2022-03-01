@@ -26,7 +26,7 @@ const CommentForm = (props) => {
           name="text"
           cols="30"
           rows="5"
-          placeholder="Create a post"
+          placeholder="Create a comment"
           required
           onChange={textChangeHandler}
           value={text}></textarea>
